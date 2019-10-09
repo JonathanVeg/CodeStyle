@@ -32,52 +32,52 @@ Após instalar as duas extensões no VSCode, adicionar isso nas configurações 
 
 #### NodeJS
 
-Em cada projeto, adicionar essas dependências no **devDependencies** do _package.json_ e rodar o _npm install_ ou _yarn_ em seguida
+Em cada projeto, adicionar essas dependências como **devDependencies**
 
-```json
-"eslint": "^6.2.1",
-"eslint-config-airbnb-base": "^14.0.0",
-"eslint-config-prettier": "^6.1.0",
-"eslint-plugin-import": "^2.18.2",
-"eslint-plugin-prettier": "^3.1.0",
+```bash
+yarn add -D eslint eslint-config-airbnb-base eslint-config-prettier eslint-plugin-import eslint-plugin-prettier
+
+# OU
+
+npm install -D eslint eslint-config-airbnb-base eslint-config-prettier eslint-plugin-import eslint-plugin-prettier
 ```
 
 Dentro de cada projeto **NodeJS**, adicionar o arquivo .eslintrc.js com o seguinte conteúdo:
 
 ```javascript
 module.exports = {
-    env: {
-        es6: true,
-        node: true,
-    },
-    extends: ["airbnb-base"],
-    globals: {
-        Atomics: "readonly",
-        SharedArrayBuffer: "readonly",
-    },
-    parserOptions: {
-        ecmaVersion: 2018,
-        sourceType: "module",
-    },
-    rules: {
-        indent: ["error", 2],
-        "no-multiple-empty-lines": [1, { max: 1 }],
-        "class-methods-use-this": "off",
-        "no-param-reassign": "off",
-        "comma-dangle": [
-            "error",
-            {
-                arrays: "never",
-                objects: "always",
-            },
-        ],
-        "no-unused-vars": [
-            "error",
-            {
-                argsIgnorePattern: "next",
-            },
-        ],
-    },
+  env: {
+    es6: true,
+    node: true
+  },
+  extends: ["airbnb-base"],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly"
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: "module"
+  },
+  rules: {
+    indent: ["error", 2],
+    "no-multiple-empty-lines": [1, { max: 1 }],
+    "class-methods-use-this": "off",
+    "no-param-reassign": "off",
+    "comma-dangle": [
+      "error",
+      {
+        arrays: "never",
+        objects: "always"
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "next"
+      }
+    ]
+  }
 };
 ```
 
@@ -86,59 +86,55 @@ module.exports = {
 Em cada projeto, adicionar essas dependências no **devDependencies** do _package.json_ e rodar o _npm install_ ou _yarn_ em seguida
 
 ```json
-"eslint": "^6.2.2",
-"eslint-config-airbnb": "^18.0.1",
-"eslint-config-prettier": "^6.1.0",
-"eslint-plugin-import": "^2.18.2",
-"eslint-plugin-jsx-a11y": "^6.2.3",
-"eslint-plugin-prettier": "^3.1.0",
-"eslint-plugin-react": "^7.14.3",
-"eslint-plugin-react-hooks": "^1.7.0",
-"prettier": "^1.18.2"
+yarn add -D eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier
+
+# ou
+
+npm install -D eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier
 ```
 
 Dentro de cada projeto **ReactJS**, adicionar o arquivo .eslintrc.js com o seguinte conteúdo:
 
 ```javascript
 module.exports = {
-    env: {
-        browser: true,
-        es6: true,
+  env: {
+    browser: true,
+    es6: true
+  },
+  extends: ["airbnb", "prettier", "prettier/react"],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly"
+  },
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
     },
-    extends: ["airbnb", "prettier", "prettier/react"],
-    globals: {
-        Atomics: "readonly",
-        SharedArrayBuffer: "readonly",
-    },
-    parser: "babel-eslint",
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true,
-        },
-        ecmaVersion: 2018,
-        sourceType: "module",
-    },
-    plugins: ["react"],
-    rules: {
-        quotes: [2, "single"],
-        indent: ["error", 2],
-        "no-multiple-empty-lines": [1, { max: 1 }],
-        "prettier/prettier": "error",
-        "comma-dangle": [
-            "error",
-            {
-                arrays: "never",
-                objects: "always",
-            },
-        ],
-        "react/jsx-filename-extension": [
-            "warn",
-            {
-                extensions: ["js", "jsx"],
-            },
-        ],
-        "import/prefer-default-export": "off",
-    },
+    ecmaVersion: 2018,
+    sourceType: "module"
+  },
+  plugins: ["react"],
+  rules: {
+    quotes: [2, "single"],
+    indent: ["error", 2],
+    "no-multiple-empty-lines": [1, { max: 1 }],
+    "prettier/prettier": "error",
+    "comma-dangle": [
+      "error",
+      {
+        arrays: "never",
+        objects: "always"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        extensions: ["js", "jsx"]
+      }
+    ],
+    "import/prefer-default-export": "off"
+  }
 };
 ```
 
@@ -158,28 +154,6 @@ Ajuda a visualizar as cores dentro do VSCode. Ele identifica onde tem um hexadec
 
 Ao conectar ao github, com ela você consegue sincronizar suas configurações do VSCode direto num _gist_ do github. Bastante útil quando se tem muitas extensões e não quer o risco de perder suas configurações.
 
-### Husky = Correcões automáticas antes de dar o gitcommit
-
-Permite criar hooks para as ações do GIT. No nosso caso, formatará o código de maneira automática usando as configs do eslint antes de dar o commit, caso o mesmo não tenha sido editado automaticamente ao salvar.
-
-Adicione globalmente a dependência do ESLint na máquina rodando `npm i -g eslint` no terminal (uma única vez).
-
-Em cada projeto, adicionar essa dependência no **devDependencies** do _package.json_ e rodar o _npm install_ ou _yarn_ em seguida
-
-```json
-"husky": "^4.0.0-beta.1"
-```
-
-Depois disso, adicione os hooks, também no _package.json_
-
-```json
-"husky": {
-    "hooks": {
-        "pre-commit": "eslint --fix */*.js"
-    }
-}
-```
-
 ## GIT
 
 Nunca esquecer de configurar o .gitignore adequadamente. Na pasta gitignores tem arquivos base para o gitignore de node, reactjs e reactnative.
@@ -190,10 +164,10 @@ Evitar commits com descrições poucos explicativas.
 
 Sempre trabalharemos com pelo menos 3 branches:
 
--   Master: somente coisas prontas para ir para produção.
--   Homologação: branch de branch para o cliente.
--   Dev: tudo que está em desenvolvimento, está pronto, mas ainda não foi para produção. Branch que irá para o servidor de testes adequado.
--   Feature: cada feature precisa ter sua branch. Uma vez pronta (e testada!) é feito um pull request para a branch _dev_.
+- Master: somente coisas prontas para ir para produção.
+- Homologação: branch de branch para o cliente.
+- Dev: tudo que está em desenvolvimento, está pronto, mas ainda não foi para produção. Branch que irá para o servidor de testes adequado.
+- Feature: cada feature precisa ter sua branch. Uma vez pronta (e testada!) é feito um pull request para a branch _dev_.
 
 ## TESTES
 
